@@ -1,0 +1,109 @@
+
+@SpringBootApplication is comibation of 3 Annotations
+- @Configuration
+- @EnableAutoConfiguratione
+- @ComponentScan
+
+
+-JPA (Java persistance API)
+ -> in JPA is work on ORM(Object relational Mapping) (object directly map to database attributes)
+ -> JPA is implement using open JPA, hibernate, Eclipse Link
+ 
+ -> EntityManagerFactory is provide EntityManager class -> (CRUD operations)
+ 
+ -> All are Interfaces
+ -> We can use UserRepository extends CRUDRepository
+ -> More over UserRepository extends JPARepository(Extra features)
+ -> JPAReopsitory extends CRUDRepository(internally)
+ 
+ -> JPA is specification or standard and hibernate is implementation
+ 
+--------------------------------------------------------------------------------------------------------------
+
+-Web service has define set of contrainsts
+
+-> Client and server (We can use Cliend and server)
+-> Stateless (server is not store client's data) like physical layer
+-> Cacheable (Client pass the data after we can cache or flush the data)
+-> Layered (Layered architecture contain some layer, some proxy, some protocol where we can send the request) 
+
+-> HTTP Methods
+	- GET,POST,PUT,DELETE
+-> Errors
+	- 404 -> Resource not found
+	- 200 -> Success
+	- 201 -> Created
+	- 401 -> Unauthorized
+	- 500 -> Internal server issues (Server Error)
+	
+--------------------------------------------------------------------------------------------------------------
+
+-> Spring Boot DevTools - (Developer module)
+	-> decrease time increase productivity
+	-> pickup the changes and restart the server
+	-> Dependency name -> spring-boot-devtools
+	-> Browser Reload (Live Server like VS Code)
+	-> Free marker,themeleaf,velocity (property defaults) remove Cache data
+	-> Automatic Restart 
+	-> Remote Application
+	
+-> Syntax of Stream map
+
+books = books.stream().filter(book->{
+			if(book.getId()!=id) {
+				return true;
+			}else {
+				return false;
+			}
+			
+}).collect(Collectors.toList());
+//taking that which are true
+
+-> Syntax of Stream list
+
+books = books.stream().map(e->{
+			if(e.getId() == id) {
+				e.setName(b.getName());
+				e.setPages(b.getPages());
+			}
+			return e;
+}).toList();
+//changing that particular object
+
+-> ResponseEntity has many methods (use for custom reply)
+	-> Syntax
+	   		ResponseEntity.of(Optional.of(book));
+			ResponseEntity.ok(book);
+			ResponseEntity.ok().body(book);
+			//this three are equal
+		 
+		 	ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+ --------------------------------------------------------------------------------------------------------------
+ 
+ - Concept of back reference and manage reference
+ 
+ 	-> in our particular project BookEntity is contain AuthorEntity which is mapped with OneToOne Relationship 
+ 	-> also Author is have one book so we can define OneToOne Relationship in AuthorEntity
+ 	-> Problem is when am i fetching book is show author and in author it show book so it shows in continues manner.
+ 	-> We have to used JsonManageRefenerce and JsonBackReference in this example.
+ 	 
+ - When we use relationship concept between child and parent so that in parent table the object is look like int called id which created in child table 
+   and store the reference in the parent table
+   
+ - Reference column in child is created a copy of attribute in child table and store the id 
+   user -> address (in address table we have many more address is mapped with one single user)
+   
+   in particular project BookEntity and CategoryEntity where CategoryEntity contain bookid(in categoryEntity) 
+   	@OneToOne
+	@JoinColumn(name = "bookid",referencedColumnName = "bookid")
+	BookEntity book;
+ 
+ --------------------------------------------------------------------------------------------------------------
+ 
+ -> File read write concept is to lengthy so we can use Files.copy(getStream,path,replace and exists)
+ 
+ //in one line uploading done
+ 
+ -> for dynamic path we use classPathResource("static/images").getFile().getAbsolutePath();
+ 
