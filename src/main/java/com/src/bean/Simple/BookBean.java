@@ -4,7 +4,7 @@ public class BookBean {
 	int id;
 	String name;
 	int pages;
-	
+	//this is simple book bean
 	public BookBean() {
 		super();
 	}
